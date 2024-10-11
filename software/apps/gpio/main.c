@@ -47,15 +47,38 @@ int main(void) {
   gpio_clear(37);
   gpio_clear(30);
 
+
+//   // config buttons to inputs
+ gpio_config(14, 0);
+  gpio_config(23, 0);
+  gpio_config(20,1);
+  bool button1 = false;
+  bool button2 = false;
+
+  // loop forever
   printf("Looping\n");
-  while (1) {
+while (1) {
 
     // Control LED with buttons
     // Button A is P0.14 and active low
     // Button B is P0.23 and active low
     // Add code here
-   
+    button1 = gpio_read(14);
+    button2 = gpio_read(23);
+
+    if (!button1){
+      gpio_set(20);
+     
+    }
+    if (button2){
+      gpio_clear(20);
+      
+    }
+
+    // printf("1: %s\n", button1 ? "true" : "false");
+    // printf("2: %s\n\n", button2 ? "true" : "false");
+    
     nrf_delay_ms(100);
   }
-}
 
+}
